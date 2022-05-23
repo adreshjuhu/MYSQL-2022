@@ -1,0 +1,42 @@
+ans SECTION 2 ---
+PROCEDURE -----
+
+create table tempp
+(
+ string1 varchar(100),
+ string2 varchar(100),
+ msg varchar(100)
+);
+delimiter //
+create procedure
+PROC1(string1 varchar(100),string2 varchar(100))
+begin
+declare msg varchar(100);
+declare num int ;
+select LOCATE (string1,string2)
+into num ;
+if num>0 then
+insert into tempp 
+values(string1,string2,'String1 exists in String2');
+else
+insert into tempp
+values (string1,string2,'String1 does not exists in String2');
+end if ;
+select * from tempp;
+end; //
+delimiter ;
+---------------------------------------------------------------------------------------------------
+ans FUNCTION
+delimiter //
+create function FUNC1(side1 int , side2 int , side3 int)
+returns varchar(100)
+deterministic
+begin
+if side1+side2 > side3 and side2+side3 > side1 and side3+side1 > side2 then
+return 'TRUE';
+else 
+return 'false';
+end if ; 
+end ;//
+delimiter ;
+delimiter //
